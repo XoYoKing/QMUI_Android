@@ -6,7 +6,8 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        //classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha6'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
     }
@@ -19,7 +20,7 @@ allprojects {
     }
 
     ext {
-        buildToolsVersion = "24.0.3"
+        buildToolsVersion = "25.0.2"
         minSdkVersion = 14
         targetSdkVersion = 25
         compileSdkVersion = 25
