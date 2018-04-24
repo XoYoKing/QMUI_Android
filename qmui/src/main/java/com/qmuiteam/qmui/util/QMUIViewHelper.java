@@ -148,7 +148,7 @@ public class QMUIViewHelper {
      * @param stepDuration 每一步变化的时长
      * @param endAction    动画结束后的回调
      */
-    public static void playViewBackgroundAnimation(final View v, @ColorInt int bgColor, int[] alphaArray, int stepDuration, final Runnable endAction) {
+    public static Animator playViewBackgroundAnimation(final View v, @ColorInt int bgColor, int[] alphaArray, int stepDuration, final Runnable endAction) {
         int animationCount = alphaArray.length - 1;
 
         Drawable bgDrawable = new ColorDrawable(bgColor);
@@ -186,6 +186,7 @@ public class QMUIViewHelper {
         });
         animatorSet.playSequentially(animatorList);
         animatorSet.start();
+        return animatorSet;
     }
 
     public static void playViewBackgroundAnimation(final View v, @ColorInt int bgColor, int[] alphaArray, int stepDuration) {
@@ -347,10 +348,13 @@ public class QMUIViewHelper {
         }
     }
 
-    public static void clearValueAnimator(ValueAnimator animator) {
+    public static void clearValueAnimator(Animator animator) {
         if (animator != null) {
             animator.removeAllListeners();
-            animator.removeAllUpdateListeners();
+            if(animator instanceof ValueAnimator){
+                ((ValueAnimator)animator).removeAllUpdateListeners();
+            }
+
             if (Build.VERSION.SDK_INT >= 19) {
                 animator.pause();
             }
@@ -609,6 +613,24 @@ public class QMUIViewHelper {
             }
         }
         return view;
+    }
+
+    public static void safeSetImageViewSelected(ImageView imageView, boolean selected){
+        // imageView setSelected 实现有问题。
+        // resizeFromDrawable 中判断 drawable size 是否改变而调用 requestLayout，看似合理，但不会被调用
+        // 因为 super.setSelected(selected) 会调用 refreshDrawableState
+        // 而从 android 6 以后， ImageView 会重载refreshDrawableState，并在里面处理了 drawable size 改变的问题,
+        // 从而导致 resizeFromDrawable 的判断失效
+        Drawable drawable = imageView.getDrawable();
+        if(drawable == null){
+            return;
+        }
+        int drawableWidth = drawable.getIntrinsicWidth();
+        int drawableHeight = drawable.getIntrinsicHeight();
+        imageView.setSelected(selected);
+        if(drawable.getIntrinsicWidth() != drawableWidth || drawable.getIntrinsicHeight() != drawableHeight){
+            imageView.requestLayout();
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.qmuiteam.qmuidemo;
+package com.qmuiteam.qmuidemo.manager;
 
 import com.qmuiteam.qmuidemo.base.BaseFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDBottomSheetFragment;
@@ -8,6 +8,7 @@ import com.qmuiteam.qmuidemo.fragment.components.QDDialogFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDEmptyViewFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDFloatLayoutFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDGroupListViewFragment;
+import com.qmuiteam.qmuidemo.fragment.components.QDLayoutFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDLinkTextViewFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDPopupFragment;
 import com.qmuiteam.qmuidemo.fragment.components.QDProgressBarFragment;
@@ -20,6 +21,7 @@ import com.qmuiteam.qmuidemo.fragment.components.QDVerticalTextViewFragment;
 import com.qmuiteam.qmuidemo.fragment.components.qqface.QDQQFaceFragment;
 import com.qmuiteam.qmuidemo.fragment.components.viewpager.QDViewPagerFragment;
 import com.qmuiteam.qmuidemo.fragment.lab.QDAnimationListViewFragment;
+import com.qmuiteam.qmuidemo.fragment.lab.QDArchTestFragment;
 import com.qmuiteam.qmuidemo.fragment.lab.QDSnapHelperFragment;
 import com.qmuiteam.qmuidemo.fragment.util.QDColorHelperFragment;
 import com.qmuiteam.qmuidemo.fragment.util.QDDeviceHelperFragment;
@@ -84,6 +86,7 @@ public class QDDataManager {
         mComponentsNames.add(QDSpanFragment.class);
         mComponentsNames.add(QDCollapsingTopBarLayoutFragment.class);
         mComponentsNames.add(QDViewPagerFragment.class);
+        mComponentsNames.add(QDLayoutFragment.class);
     }
 
     /**
@@ -105,6 +108,7 @@ public class QDDataManager {
         mLabNames = new ArrayList<>();
         mLabNames.add(QDAnimationListViewFragment.class);
         mLabNames.add(QDSnapHelperFragment.class);
+        mLabNames.add(QDArchTestFragment.class);
     }
 
     public QDItemDescription getDescription(Class<? extends BaseFragment> cls) {
